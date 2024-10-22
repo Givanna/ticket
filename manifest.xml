@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
            xsi:type="MailApp">
+
   <Id>f47a98b1-75f8-4a09-8f7b-35d8dd4a8e88</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Your Organization Name</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName>Automated Support Ticket Add-in</DisplayName>
   <Description>Automatically populates email fields when specific recipient is detected.</Description>
-  <IconUrl DefaultValue=""/>
-  <SupportUrl DefaultValue="https://givanna.github.io/ticket/help"/>
+  <IconUrl DefaultValue="https://example.com/icon.png"/> <!-- Replace with your icon URL -->
+  <SupportUrl DefaultValue="https://example.com/support"/> <!-- Optional, can be removed if not needed -->
+  
   <Permissions>ReadWriteMailbox</Permissions>
+  
   <Hosts>
     <Host Name="Mailbox"/>
   </Hosts>
+  
   <Requirements>
     <Sets DefaultMinVersion="1.1">
       <Set Name="Mailbox"/>
     </Sets>
   </Requirements>
+  
   <FormSettings>
     <Form xsi:type="ItemRead"/>
     <Form xsi:type="ItemEdit">
@@ -29,6 +34,7 @@
       </DesktopSettings>
     </Form>
   </FormSettings>
+
   <ExtensionPoint xsi:type="MessageComposeCommandSurface">
     <OfficeTab id="TabDefault">
       <Group id="msgComposeGroup">
@@ -46,6 +52,7 @@
       </Group>
     </OfficeTab>
   </ExtensionPoint>
+
   <Resources>
     <bt:ShortStrings>
       <bt:String id="groupLabel" DefaultValue="Support Ticket Automation"/>
