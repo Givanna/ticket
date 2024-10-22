@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
            xsi:type="MailApp">
 
   <!-- Basic Details -->
@@ -12,8 +12,7 @@
   <DisplayName>Automated Support Ticket Add-in</DisplayName>
   <Description>Automatically populates email fields when specific recipient is detected.</Description>
   
-  <!-- Remove icons for now -->
-  <IconUrl DefaultValue=""/> <!-- Empty icon URL -->
+  <IconUrl DefaultValue=""/> <!-- Leave empty for now -->
   <SupportUrl DefaultValue="https://givanna.github.io/ticket/help"/>
   
   <!-- Permissions required for the Add-in -->
@@ -68,5 +67,8 @@
     <bt:LongStrings>
       <bt:String id="buttonDescription" DefaultValue="Automatically fill the subject and body when emailing givannawright@gmail.com"/>
     </bt:LongStrings>
+    <bt:Urls>
+      <bt:Url id="taskpaneUrl" DefaultValue="https://givanna.github.io/ticket/taskpane.html"/>
+    </bt:Urls>
   </Resources>
 </OfficeApp>
