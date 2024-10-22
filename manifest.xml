@@ -31,7 +31,7 @@
     <Form xsi:type="ItemRead"/>
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://givanna.github.io/ticket/"/>
+        <SourceLocation DefaultValue="https://givanna.github.io/ticket/taskpane.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
