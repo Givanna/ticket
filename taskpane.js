@@ -1,28 +1,45 @@
-/*
- * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
- * See LICENSE in the project root for license information.
- */
-
-/* global document, Office */
-
-Office.onReady((info) => {
+Office.onReady(function (info) {
+  // Office is ready
   if (info.host === Office.HostType.Outlook) {
-    document.getElementById("sideload-msg").style.display = "none";
-    document.getElementById("app-body").style.display = "flex";
-    document.getElementById("run").onclick = run;
+      // Ensure the user is in compose mode
+      Office.context.mailbox.item.addHandlerAsync(Office.EventType.ItemChanged, itemChanged);
   }
 });
 
-export async function run() {
-  /**
-   * Insert your Outlook code here
-   */
+// Handler for when the item changes (when the recipient is changed)
+function itemChanged() {
+  // Get the current item
+  var item = Office.context.mailbox.item;
 
-  const item = Office.context.mailbox.item;
-  let insertAt = document.getElementById("item-subject");
-  let label = document.createElement("b").appendChild(document.createTextNode("Subject: "));
-  insertAt.appendChild(label);
-  insertAt.appendChild(document.createElement("br"));
-  insertAt.appendChild(document.createTextNode(item.subject));
-  insertAt.appendChild(document.createElement("br"));
+  // Get the To recipients
+  item.to.getAsync(function (result) {
+      if (result.status === Office.AsyncResultStatus.Succeeded) {
+          const recipients = result.value;
+
+          // Check if the specific recipient is included
+          const recipientEmail = 'givannawright@gmail.com';
+          if (recipients.some(r => r.emailAddress.toLowerCase() === recipientEmail.toLowerCase())) {
+              // Set the subject
+              item.subject.setAsync('Support Ticket', function (result) {
+                  if (result.status === Office.AsyncResultStatus.Succeeded) {
+                      console.log('Subject set to Support Ticket.');
+                  } else {
+                      console.error('Failed to set subject: ' + result.error.message);
+                  }
+              });
+
+              // Set the body
+              const bodyContent = `Who is this for?\nWhat is the issue?`;
+              item.body.setAsync(bodyContent, { coercionType: Office.CoercionType.Text }, function (result) {
+                  if (result.status === Office.AsyncResultStatus.Succeeded) {
+                      console.log('Body populated with questions.');
+                  } else {
+                      console.error('Failed to set body: ' + result.error.message);
+                  }
+              });
+          }
+      } else {
+          console.error('Failed to get recipients: ' + result.error.message);
+      }
+  });
 }
